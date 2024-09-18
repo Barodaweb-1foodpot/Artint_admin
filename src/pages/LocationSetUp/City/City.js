@@ -298,7 +298,7 @@ const City = () => {
 
     await axios
       .post(
-        `${process.env.REACT_APP_API_URL_COFFEE}/api/auth/location/cities`,
+        `${process.env.REACT_APP_API_URL}/api/auth/location/cities`,
         {
           skip: skip,
           per_page: perPage,
@@ -401,7 +401,7 @@ const City = () => {
     },
   ];
 
-  document.title = "City | Project Name";
+  document.title = "City | ArtTint";
   return (
     <React.Fragment>
       <UiContent />

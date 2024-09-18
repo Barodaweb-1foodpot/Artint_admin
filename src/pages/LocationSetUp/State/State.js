@@ -290,7 +290,7 @@ const State = () => {
 
     await axios
       .post(
-        `${process.env.REACT_APP_API_URL_COFFEE}/api/auth/location/states`,
+        `${process.env.REACT_APP_API_URL}/api/auth/location/states`,
         {
           skip: skip,
           per_page: perPage,
@@ -386,7 +386,7 @@ const State = () => {
     },
   ];
 
-  document.title = "State | Project Name";
+  document.title = "State | ArtTint";
   return (
     <React.Fragment>
       <UiContent />

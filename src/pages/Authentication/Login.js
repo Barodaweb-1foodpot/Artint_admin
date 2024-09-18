@@ -14,7 +14,7 @@ import {
 } from "reactstrap";
 import { Alert } from "react-bootstrap";
 
-import logo from "../../assets/images/logo/RC-logo-png.png";
+import logo from "../../assets/images/main-logo.png";
 
 import { ToastContainer, toast } from "react-toastify";
 //redux
@@ -58,7 +58,7 @@ const Login = (props) => {
     setFormErrors(validate(values));
 
     axios
-      .post(`${process.env.REACT_APP_API_URL_COFFEE}/api/adminLogin`, values)
+      .post(`${process.env.REACT_APP_API_URL}/api/adminLogin`, values)
       .then((res) => {
         if (res.isOk) {
           console.log(" login", res);
@@ -105,7 +105,7 @@ const Login = (props) => {
   const validClassPassword =
     errPassword && isSubmit ? "form-control is-invalid" : "form-control pe-5";
 
-  document.title = " SignIn | Project Name ";
+  document.title = " SignIn | ArtTint ";
   return (
     <React.Fragment>
       {/* <ParticlesAuth> */}
@@ -136,8 +136,8 @@ const Login = (props) => {
                             style={{ display: "flex", alignItems: "center" }}
                             src={logo}
                             height={"70px"}
-                            width={"80px"}
-                            alt="Project Name"
+                            width={"100%"}
+                            alt="ArtTint"
                           />
                         </Link>
                       </div>

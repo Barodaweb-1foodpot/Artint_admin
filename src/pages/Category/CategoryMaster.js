@@ -224,7 +224,7 @@ const CategoryMaster = () => {
 
     await axios
       .post(
-        `${process.env.REACT_APP_API_URL_COFFEE}/api/auth/list-by-params/categoryMaster`,
+        `${process.env.REACT_APP_API_URL}/api/auth/list-by-params/categoryMaster`,
         {
           skip: skip,
           per_page: perPage,
@@ -313,7 +313,7 @@ const CategoryMaster = () => {
     },
   ];
 
-  document.title = "Products Category | Project Name";
+  document.title = "Products Category | ArtTint";
 
   return (
     <React.Fragment>

@@ -247,7 +247,7 @@ const Country = () => {
 
     await axios
       .post(
-        `${process.env.REACT_APP_API_URL_COFFEE}/api/auth/location/countries`,
+        `${process.env.REACT_APP_API_URL}/api/auth/location/countries`,
         {
           skip: skip,
           per_page: perPage,
@@ -336,7 +336,7 @@ const Country = () => {
     },
   ];
 
-  document.title = "Country | Project Name";
+  document.title = "Country | ArtTint";
 
   return (
     <React.Fragment>

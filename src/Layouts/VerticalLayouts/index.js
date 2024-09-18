@@ -131,63 +131,16 @@ const VerticalLayout = (props) => {
 
         <Collapse className="menu-dropdown" isOpen={setup}>
           <ul className="nav nav-sm flex-column test">
-            <li className="nav-item">
-              <Link to="/company-details" className="nav-link">
-                Company Details
-              </Link>
-            </li>
+             
 
             <li className="nav-item">
               <Link to="/admin-user" className="nav-link">
                 Admin Users
               </Link>
             </li>
-            {/* <li className="nav-item">
-              <Link to="/#" className="nav-link">
-                Roles
-              </Link>
-            </li> */}
+            
 
-            <li className="nav-item">
-              <Link
-                className="nav-link menu-link"
-                to="#"
-                data-bs-toggle="collapse"
-                onClick={() => {
-                  setLocationSetup(!locationSetup);
-                }}
-              >
-                <span data-key="t-apps"> Location Setup </span>
-              </Link>
-              <Collapse
-                className="menu-dropdown"
-                isOpen={locationSetup}
-                //   id="sidebarApps"
-              >
-                <ul className="nav nav-sm flex-column test">
-                  <li className="nav-item">
-                    <Link to="/country" className="nav-link">
-                      Country
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link to="/state" className="nav-link">
-                      State
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link to="/city" className="nav-link">
-                      City
-                    </Link>
-                  </li>
-                  {/* <li className="nav-item">
-                    <Link to="/location" className="nav-link">
-                      Company Location
-                    </Link>
-                  </li> */}
-                </ul>
-              </Collapse>
-            </li>
+           
           </ul>
         </Collapse>
       </li>
@@ -195,122 +148,14 @@ const VerticalLayout = (props) => {
       <li className="nav-item">
         <Link
           className="nav-link menu-link"
-          to="#"
-          data-bs-toggle="collapse"
-          onClick={() => {
-            setParams(!params);
-          }}
-        >
-          <span data-key="t-apps"> Parameters </span>
+          to="/art-piece">
+          <span data-key="t-apps"> Art Piece Master </span>
         </Link>
 
-        <Collapse className="menu-dropdown" isOpen={params}>
-          <ul className="nav nav-sm flex-column test">
-            <li className="nav-item">
-              <Link
-                className="nav-link menu-link"
-                to="#"
-                data-bs-toggle="collapse"
-                onClick={() => {
-                  setCategory(!category);
-                }}
-              >
-                <span data-key="t-apps"> Category Master</span>
-              </Link>
-              <Collapse className="menu-dropdown" isOpen={category}>
-                <ul className="nav nav-sm flex-column test">
-                  <li className="nav-item">
-                    <Link className="nav-link menu-link" to="/category">
-                      <span data-key="t-apps">Products Category </span>
-                    </Link>
-                  </li>
-                </ul>
-              </Collapse>
-            </li>
-          </ul>
-        </Collapse>
+       
       </li>
 
-      <li className="nav-item">
-        <Link
-          className="nav-link menu-link"
-          to="#"
-          data-bs-toggle="collapse"
-          onClick={() => {
-            setproduct(!product);
-          }}
-        >
-          <span data-key="t-apps"> Product Master </span>
-        </Link>
-        <Collapse
-          className="menu-dropdown"
-          isOpen={product}
-          //   id="sidebarApps"
-        >
-          <ul className="nav nav-sm flex-column test">
-            <li className="nav-item">
-              <Link to="/product-details" className="nav-link">
-                Product Details
-              </Link>
-            </li>
-          </ul>
-        </Collapse>
-      </li>
-
-      <li className="nav-item">
-        <Link
-          className="nav-link menu-link"
-          to="#"
-          data-bs-toggle="collapse"
-          onClick={() => {
-            setPolicy(!policy);
-          }}
-        >
-          <span data-key="t-apps"> Policy and Promos</span>
-        </Link>
-        <Collapse className="menu-dropdown" isOpen={policy}>
-          <ul className="nav nav-sm flex-column test"></ul>
-          <ul className="nav nav-sm flex-column test">
-            <li className="nav-item">
-              <Link to="/promocode-master" className="nav-link">
-                Promocode Master
-              </Link>
-            </li>
-          </ul>
-          <ul className="nav nav-sm flex-column test"></ul>
-        </Collapse>
-      </li>
-
-      <li className="nav-item">
-        <Link
-          className="nav-link menu-link"
-          to="#"
-          data-bs-toggle="collapse"
-          onClick={() => {
-            setCMS(!cms);
-          }}
-        >
-          <span data-key="t-apps"> CMS </span>
-        </Link>
-        <Collapse
-          className="menu-dropdown"
-          isOpen={cms}
-          //   id="sidebarApps"
-        >
-          <ul className="nav nav-sm flex-column test">
-            <li className="nav-item">
-              <Link className="nav-link menu-link" to="/blogs">
-                <span data-key="t-apps">Blogs </span>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link menu-link" to="/banner">
-                <span data-key="t-apps">Banner </span>
-              </Link>
-            </li>
-          </ul>
-        </Collapse>
-      </li>
+    
     </React.Fragment>
   );
 };

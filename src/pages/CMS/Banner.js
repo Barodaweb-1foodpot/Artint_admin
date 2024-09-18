@@ -379,7 +379,7 @@ const Banner = () => {
 
     await axios
       .post(
-        `${process.env.REACT_APP_API_URL_COFFEE}/api/auth/list-by-params/banner-images`,
+        `${process.env.REACT_APP_API_URL}/api/auth/list-by-params/banner-images`,
         {
           skip: skip,
           per_page: perPage,
@@ -492,7 +492,7 @@ const Banner = () => {
     },
   ];
 
-  document.title = "Bannner | Project Name";
+  document.title = "Bannner | ArtTint";
 
   return (
     <React.Fragment>

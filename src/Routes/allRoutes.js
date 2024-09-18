@@ -14,6 +14,7 @@ import UserProfile from "../pages/Authentication/user-profile";
 import Banner from "../pages/CMS/Banner";
 import CompanyDetails from "../pages/Setup/CompanyDetails";
 import AdminUser from "../pages/Auth/AdminUser";
+import ArtPiece from "../pages/ArtPiece/ArtPiece";
 const authProtectedRoutes = [
   // { path: "/dashboard", component: <DashboardCrm /> },
   { path: "/profile", component: <UserProfile /> },
@@ -31,6 +32,7 @@ const authProtectedRoutes = [
   { path: "/promocode-master", component: <PromocodeMaster /> },
 
   { path: "/product-details", component: <ProductDetails /> },
+  { path: "/art-piece", component: <ArtPiece /> },
 
 
   {

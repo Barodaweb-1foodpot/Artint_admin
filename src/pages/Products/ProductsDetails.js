@@ -150,7 +150,7 @@ const ProductDetails = () => {
 
     await axios
       .post(
-        `${process.env.REACT_APP_API_URL_COFFEE}/api/auth/list-by-params/product-details`,
+        `${process.env.REACT_APP_API_URL}/api/auth/list-by-params/product-details`,
         {
           skip: skip,
           per_page: perPage,
@@ -474,7 +474,7 @@ const ProductDetails = () => {
   const handleFilter = (e) => {
     setFilter(e.target.checked);
   };
-  document.title = "Product Details | Project Name";
+  document.title = "Product Details | ArtTint";
 
   return (
     <React.Fragment>
@@ -865,7 +865,7 @@ const ProductDetails = () => {
                                         src={
                                           checkImagePhoto
                                             ? photoAdd
-                                            : `${process.env.REACT_APP_API_URL_COFFEE}/${values.productImage}`
+                                            : `${process.env.REACT_APP_API_URL}/${values.productImage}`
                                         }
                                         width="180"
                                         height="200"

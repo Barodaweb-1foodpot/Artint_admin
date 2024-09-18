@@ -13,7 +13,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={configureStore({})}>
     <React.Fragment>
-       <GoogleTranslate/>
+       {/* <GoogleTranslate/> */}
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <App />
       </BrowserRouter>
