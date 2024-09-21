@@ -47,21 +47,22 @@ const ArtPiece = () => {
     const [_id, set_Id] = useState("");
 
     const initialState = {
-        category: "",           // Maps to `category`
-        artName: "",            // Maps to `artName`
-        artImage: "",           // Maps to `artImage`
-        price: "",              // Maps to `price` (as String in the schema)
-        isActive: true,        // Maps to `isActive`
-        artistName: "",         // New field based on the `ArtPiece` schema
-        year: "",               // New field based on the `ArtPiece` schema
-        artType: "",            // New field based on the `ArtPiece` schema
-        size: "",               // New field based on the `ArtPiece` schema
-        artForm: "",            // New field based on the `ArtPiece` schema
-        signature: "",          // New field based on the `ArtPiece` schema
-        certificate: "",        // New field based on the `ArtPiece` schema
-        frame: "",              // New field based on the `ArtPiece` schema
-        link1: "",              // New field based on the `ArtPiece` schema
-        link2: "",              // New field based on the `ArtPiece` schema
+        category: "",           
+        artName: "",           
+        artImage: "",         
+        price: "",             
+        isActive: true,       
+        artistName: "",  
+        artistLastName:"",       
+        year: "",               
+        artType: "",            
+        size: "",               
+        artForm: "",            
+        signature: "",          
+        certificate: "",        
+        frame: "",              
+        link1: "",              
+        URL_link: "",              
     };
 
 
@@ -89,7 +90,8 @@ const ArtPiece = () => {
         certificate,
         frame,
         link1,
-        link2
+        URL_link,
+        artistLastName
     } = values;
 
 
@@ -107,15 +109,15 @@ const ArtPiece = () => {
 
     const renderImage = (uploadimage) => {
         const imageUrl = `${process.env.REACT_APP_API_URL}/${uploadimage}`;
-    
+
         return (
-          <img
-            src={imageUrl}
-            alt="Image"
-            style={{ width: "75px", height: "75px", padding: "5px" }}
-          />
+            <img
+                src={imageUrl}
+                alt="Image"
+                style={{ width: "75px", height: "75px", padding: "5px" }}
+            />
         );
-      };
+    };
     const columns = [
         {
             name: "Sr. No.",
@@ -138,13 +140,20 @@ const ArtPiece = () => {
             minWidth: "150px",
         },
         {
+            name: "Artist Last Name",
+            selector: (row) => row.artistLastName,
+            sortable: true,
+            sortField: "artistLastName",
+            minWidth: "150px",
+        },
+        {
             name: "Image",
             cell: (row) => renderImage(row.artImage),
             sortable: true,
             sortField: "Image",
             minWidth: "150px",
-          },
-          {
+        },
+        {
             name: "Position",
             cell: (row) => {
                 const categoryLabel = cat.find((item) => item.value === row.category)?.label;
@@ -154,7 +163,7 @@ const ArtPiece = () => {
             sortable: true,
             sortField: "category",
             minWidth: "150px",
-          },
+        },
         {
             name: "Action",
             selector: (row) => {
@@ -272,6 +281,15 @@ const ArtPiece = () => {
             setErrPI(false);
         }
 
+        if (values.URL_link === "") {
+            errors.URL_link = "URL is required";
+            setErrPI(true);
+        }
+
+        if (values.URL_link !== "") {
+            setErrPI(false);
+        }
+
         return errors;
     };
 
@@ -324,16 +342,16 @@ const ArtPiece = () => {
 
     const handleCategoryChange = (e) => {
         const { value } = e.target;
-        
-        if (value === "bigImage") {
-          ASPECT_RATIO = 42 / 53; // Set aspect ratio for "Big Image"
+
+        if (value === "bigImage" || value === "rightsidewallBigImage") {
+            ASPECT_RATIO = 42 / 53; // Set aspect ratio for "Big Image"
         } else {
             console.log(value)
-          ASPECT_RATIO = 1; // Reset or set a default aspect ratio for other categories
+            ASPECT_RATIO = 1; // Reset or set a default aspect ratio for other categories
         }
-      
+
         handleChange(e); // Call your existing handleChange function to update form state
-      };
+    };
     const handleChange = (e) => {
         setValues({ ...values, [e.target.name]: e.target.value });
     };
@@ -366,7 +384,8 @@ const ArtPiece = () => {
             formdata.append("certificate", values.certificate);    // Corresponds to `certificate`
             formdata.append("frame", values.frame);                // Corresponds to `frame`
             formdata.append("link1", values.link1);                // Corresponds to `link1`
-            formdata.append("link2", values.link2);                // Corresponds to `link2`
+            formdata.append("URL_link", values.URL_link);                // Corresponds to `URL_link`
+            formdata.append("artistLastName", values.artistLastName);        
 
 
 
@@ -390,7 +409,7 @@ const ArtPiece = () => {
                         setCroppedImages([])
                         setImgSrc("")
                     }
-                    else{
+                    else {
                         toast.error(res.message)
                     }
                 })
@@ -437,30 +456,35 @@ const ArtPiece = () => {
         else {
             formdata.append("artImage", croppedBlobs, "artImage.png");
         }
-        formdata.append("category", values.category);          // Corresponds to `category`
-        formdata.append("artName", values.artName);            // Corresponds to `artName`
-        formdata.append("price", values.price);                // Corresponds to `price`
-        formdata.append("isActive", values.isActive);          // Corresponds to `isActive`
-        formdata.append("artistName", values.artistName);      // Corresponds to `artistName`
-        formdata.append("year", values.year);                  // Corresponds to `year`
-        formdata.append("artType", values.artType);            // Corresponds to `artType`
-        formdata.append("size", values.size);                  // Corresponds to `size`
-        formdata.append("artForm", values.artForm);            // Corresponds to `artForm`
-        formdata.append("signature", values.signature);        // Corresponds to `signature`
-        formdata.append("certificate", values.certificate);    // Corresponds to `certificate`
-        formdata.append("frame", values.frame);                // Corresponds to `frame`
-        formdata.append("link1", values.link1);                // Corresponds to `link1`
-        formdata.append("link2", values.link2);                // Corresponds to `link2`
+        formdata.append("category", values.category);          
+        formdata.append("artName", values.artName);            
+        formdata.append("price", values.price);                
+        formdata.append("isActive", values.isActive);          
+        formdata.append("artistName", values.artistName);      
+        formdata.append("year", values.year);                  
+        formdata.append("artType", values.artType);            
+        formdata.append("size", values.size);                 
+        formdata.append("artForm", values.artForm);           
+        formdata.append("signature", values.signature);        
+        formdata.append("certificate", values.certificate);    
+        formdata.append("frame", values.frame);              
+        formdata.append("link1", values.link1);                
+        formdata.append("URL_link", values.URL_link);           
+        formdata.append("artistLastName", values.artistLastName);    
 
         updateArtPiece(_id, formdata)
             .then((res) => {
+                if(res.isOk)
                 // setmodal_edit(!modal_edit);
-                setPhotoAdd("");
+               { setPhotoAdd("");
                 setUpdateForm(false);
-
+                toast.success(res.message)
                 fetchProducts();
                 setCheckImagePhoto(false);
-                setValues(initialState);
+                setValues(initialState);}
+                else{
+                    toast.error(res.message)
+                }
             })
             .catch((err) => {
                 console.log(err);
@@ -517,15 +541,16 @@ const ArtPiece = () => {
                     certificate: res.certificate,                          // Fill this manually, or map if available
                     frame: res.frame,                                // Fill this manually, or map if available
                     link1: res.link1,                                // Fill this manually, or map if available
-                    link2: res.link2,                                // Fill this manually, or map if available
+                    URL_link: res.URL_link,  
+                    artistLastName:res.artistLastName?res.artistLastName:""                              // Fill this manually, or map if available
 
                 });
 
-                if (res.category === "bigImage") {
+                if (res.category === "bigImage" || res.category ==="rightsidewallBigImage") {
                     ASPECT_RATIO = 42 / 54; // Set aspect ratio for "Big Image"
-                  } else {
+                } else {
                     ASPECT_RATIO = 1; // Reset or set a default aspect ratio for other categories
-                  }
+                }
             })
             .catch((err) => {
                 console.log(err);
@@ -706,10 +731,11 @@ const ArtPiece = () => {
     };
 
     const cat = [
-        {value:'leftsidewall' , label:'Left Side Wall'},
-        {value:'bigImage' , label:'Big Center Image'},
-        {value:'rightsidewall' , label:'Right Side Wall'}
-        
+        { value: 'leftsidewall', label: 'Left Side Wall' },
+        { value: 'bigImage', label: 'Big Center Image' },
+        { value: 'rightsidewall', label: 'Right Side Wall' },
+        { value: 'rightsidewallBigImage', label: 'Right Side Wall Big Image' }
+
     ]
 
     document.title = "Art Piece Master | ArtTint";
@@ -722,7 +748,7 @@ const ArtPiece = () => {
                     <BreadCrumb
                         // maintitle="Product Master"
                         title="Art Piece Master"
-                        // pageTitle="Product Master"
+                    // pageTitle="Product Master"
                     />
                     <Row>
                         <Col lg={12}>
@@ -854,7 +880,7 @@ const ArtPiece = () => {
                                                                 <Row>
                                                                     <Row>
                                                                         {/* Artist Name */}
-                                                                        <Col lg={6} className="mb-3">
+                                                                        <Col lg={4} className="mb-3">
                                                                             <Label>Artist Name <span className="text-danger">*</span></Label>
 
                                                                             <Input
@@ -868,9 +894,22 @@ const ArtPiece = () => {
                                                                             {isSubmit && <p className="text-danger">{formErrors.artistName}</p>}
 
                                                                         </Col>
+                                                                        <Col lg={4} className="mb-3">
+                                                                            <Label>Artist Last Name </Label>
+
+                                                                            <Input
+                                                                                type="text"
+                                                                                name="artistLastName"
+                                                                                placeholder="Enter artist last name"
+                                                                                required
+                                                                                value={values.artistLastName}
+                                                                                onChange={handleChange}
+                                                                            />
+                                                                            
+                                                                        </Col>
 
                                                                         {/* Art Name */}
-                                                                        <Col lg={6} className="mb-3">
+                                                                        <Col lg={4} className="mb-3">
                                                                             <Label>Art Name <span className="text-danger">*</span></Label>
                                                                             <Input
                                                                                 type="text"
@@ -884,7 +923,19 @@ const ArtPiece = () => {
                                                                             {isSubmit && <p className="text-danger">{formErrors.artName}</p>}
 
                                                                         </Col>
+                                                                        <Col lg={6} className="mb-3">
+                                                                            <Label>URL <span className="text-danger">*</span></Label>
+                                                                            <Input
+                                                                                type="text"
+                                                                                name="URL_link"
+                                                                                placeholder="Enter URL"
+                                                                                value={values.URL_link}
+                                                                                onChange={handleChange}
+                                                                            />
+                                                                            {isSubmit && <p className="text-danger">{formErrors.URL_link}</p>}
 
+
+                                                                        </Col>
                                                                         {/* Category (Dropdown) */}
                                                                         <Col lg={6} className="mb-3">
                                                                             <Label>Category <span className="text-danger">*</span></Label>
@@ -896,12 +947,12 @@ const ArtPiece = () => {
                                                                                 onChange={handleCategoryChange}
                                                                             >
                                                                                 <option value="">Select Category</option>
-                                                                                {cat.map((items)=>(
-                                                                                <option value={items.value} key={items.value} >{items.label}</option>)
-                                                                            )}
+                                                                                {cat.map((items) => (
+                                                                                    <option value={items.value} key={items.value} >{items.label}</option>)
+                                                                                )}
 
-                
-                                                                                 
+
+
                                                                             </Input>
                                                                             {isSubmit && <p className="text-danger">{formErrors.category}</p>}
 
@@ -913,7 +964,7 @@ const ArtPiece = () => {
                                                                         <Col lg={6} className="mb-3">
                                                                             <Label>Price </Label>
                                                                             <Input
-                                                                                type="number"
+                                                                                type="text"
                                                                                 name="price"
                                                                                 placeholder="Enter price"
                                                                                 required
@@ -1036,20 +1087,9 @@ const ArtPiece = () => {
 
                                                                         </Col>
 
-                                                                        <Col lg={6} className="mb-3">
-                                                                            <Label>Link 2</Label>
-                                                                            <Input
-                                                                                type="text"
-                                                                                name="link2"
-                                                                                placeholder="Enter link 2"
-                                                                                value={values.link2}
-                                                                                onChange={handleChange}
-                                                                            />
 
-
-                                                                        </Col>
                                                                         <Col lg={6} className="mb-3">
-                                                                        <Label>Art Image <span className="text-danger">*</span></Label><br/>
+                                                                            <Label>Art Image <span className="text-danger">*</span></Label><br />
                                                                             <button
                                                                                 type="button"
                                                                                 className="btn btn-primary text-light mb-3 "
@@ -1064,7 +1104,7 @@ const ArtPiece = () => {
                                                                                 {/* <i class="ri-list-check align-bottom me-1"></i>{" "} */}
                                                                                 Upload Images
                                                                             </button>
-                                                                            {croppedImages.length !=0 ? (
+                                                                            {croppedImages.length != 0 ? (
                                                                                 <div>
                                                                                     <div className="uploaded-images">
                                                                                         <img
@@ -1131,7 +1171,7 @@ const ArtPiece = () => {
                                                                 <Row>
                                                                     <Row>
                                                                         {/* Artist Name */}
-                                                                        <Col lg={6} className="mb-3">
+                                                                        <Col lg={4} className="mb-3">
                                                                             <Label>Artist Name <span className="text-danger">*</span></Label>
 
                                                                             <Input
@@ -1145,9 +1185,22 @@ const ArtPiece = () => {
                                                                             {isSubmit && <p className="text-danger">{formErrors.artistName}</p>}
 
                                                                         </Col>
+                                                                        <Col lg={4} className="mb-3">
+                                                                            <Label>Artist Last Name </Label>
+
+                                                                            <Input
+                                                                                type="text"
+                                                                                name="artistLastName"
+                                                                                placeholder="Enter artist last name"
+                                                                                required
+                                                                                value={values.artistLastName}
+                                                                                onChange={handleChange}
+                                                                            />
+                                                                            
+                                                                        </Col>
 
                                                                         {/* Art Name */}
-                                                                        <Col lg={6} className="mb-3">
+                                                                        <Col lg={4} className="mb-3">
                                                                             <Label>Art Name <span className="text-danger">*</span></Label>
                                                                             <Input
                                                                                 type="text"
@@ -1161,7 +1214,19 @@ const ArtPiece = () => {
                                                                             {isSubmit && <p className="text-danger">{formErrors.artName}</p>}
 
                                                                         </Col>
+                                                                        <Col lg={6} className="mb-3">
+                                                                            <Label>URL <span className="text-danger">*</span></Label>
+                                                                            <Input
+                                                                                type="text"
+                                                                                name="URL_link"
+                                                                                placeholder="Enter URL"
+                                                                                value={values.URL_link}
+                                                                                onChange={handleChange}
+                                                                            />
+                                                                            {isSubmit && <p className="text-danger">{formErrors.URL_link}</p>}
 
+
+                                                                        </Col>
                                                                         {/* Category (Dropdown) */}
                                                                         <Col lg={6} className="mb-3">
                                                                             <Label>Category <span className="text-danger">*</span></Label>
@@ -1173,9 +1238,9 @@ const ArtPiece = () => {
                                                                                 onChange={handleCategoryChange}
                                                                             >
                                                                                 <option value="">Select Category</option>
-                                                                                {cat.map((items)=>(
-                                                                                <option value={items.value} key={items.value} >{items.label}</option>)
-                                                                            )}
+                                                                                {cat.map((items) => (
+                                                                                    <option value={items.value} key={items.value} >{items.label}</option>)
+                                                                                )}
                                                                             </Input>
                                                                             {isSubmit && <p className="text-danger">{formErrors.category}</p>}
 
@@ -1187,7 +1252,7 @@ const ArtPiece = () => {
                                                                         <Col lg={6} className="mb-3">
                                                                             <Label>Price </Label>
                                                                             <Input
-                                                                                type="number"
+                                                                                type="text"
                                                                                 name="price"
                                                                                 placeholder="Enter price"
                                                                                 required
@@ -1310,21 +1375,10 @@ const ArtPiece = () => {
 
                                                                         </Col>
 
-                                                                        <Col lg={6} className="mb-3">
-                                                                            <Label>Link 2</Label>
-                                                                            <Input
-                                                                                type="text"
-                                                                                name="link2"
-                                                                                placeholder="Enter link 2"
-                                                                                value={values.link2}
-                                                                                onChange={handleChange}
-                                                                            />
 
-
-                                                                        </Col>
                                                                         <Col lg={6} className="mb-3">
 
-                                                                            <Label>Art Image <span className="text-danger">*</span></Label><br/>
+                                                                            <Label>Art Image <span className="text-danger">*</span></Label><br />
                                                                             <button
                                                                                 type="button"
                                                                                 className="btn btn-primary text-light mb-3 "

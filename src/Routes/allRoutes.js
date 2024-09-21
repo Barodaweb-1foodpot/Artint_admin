@@ -15,6 +15,7 @@ import Banner from "../pages/CMS/Banner";
 import CompanyDetails from "../pages/Setup/CompanyDetails";
 import AdminUser from "../pages/Auth/AdminUser";
 import ArtPiece from "../pages/ArtPiece/ArtPiece";
+import ArtPieceInquiry from "../pages/ArtPieceInquiry/ArtPieceInquiry";
 const authProtectedRoutes = [
   // { path: "/dashboard", component: <DashboardCrm /> },
   { path: "/profile", component: <UserProfile /> },
@@ -33,7 +34,7 @@ const authProtectedRoutes = [
 
   { path: "/product-details", component: <ProductDetails /> },
   { path: "/art-piece", component: <ArtPiece /> },
-
+  { path: "/inquiry", component: <ArtPieceInquiry /> },
 
   {
     path: "/",
