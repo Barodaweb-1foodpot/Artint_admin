@@ -117,9 +117,10 @@ const AdminUser = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    setFormErrors({});
-
+    let errors = validate(values);
+    setFormErrors(errors);
     setIsSubmit(true);
+    if (Object.keys(errors).length === 0) {
     createAdminUser(values)
       .then((res) => {
         console.log("res", res);
@@ -136,7 +137,7 @@ const AdminUser = () => {
       })
       .catch((err) => {
         console.log(err);
-      });
+      });}
   };
 
   const handleDelete = (e) => {
@@ -179,7 +180,7 @@ const AdminUser = () => {
   const [errEM, setErrEM] = useState(false);
   const [errPA, setErrPA] = useState(false);
 
-  const validate = (values) => {
+  const validate = () => {
     const errors = {};
 
     if (values.firstName === "") {
@@ -373,7 +374,7 @@ const AdminUser = () => {
               <Card>
                 <CardHeader>
                   <FormsHeader
-                    formName="Products Category"
+                    formName="Admin Users"
                     filter={filter}
                     handleFilter={handleFilter}
                     tog_list={tog_list}

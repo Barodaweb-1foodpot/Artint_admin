@@ -47,14 +47,14 @@ const ArtPieceInquiry = () => {
     const [_id, set_Id] = useState("");
 
     const initialState = {
-        artName: "",         
-        name: "", 
-        email:''   ,
-        phone:'',
-        countryCode:''  ,
-        desc:""    ,
-        isActive: true,        
-               
+        artName: "",
+        name: "",
+        email: '',
+        phone: '',
+        countryCode: '',
+        desc: "",
+        isActive: true,
+
     };
 
 
@@ -68,14 +68,14 @@ const ArtPieceInquiry = () => {
     const [values, setValues] = useState(initialState);
 
     const {
-        artName,         
-        name, 
+        artName,
+        name,
         email,
         phone,
         countryCode,
         desc,
-        isActive,        
-               
+        isActive,
+
     } = values;
 
 
@@ -137,7 +137,7 @@ const ArtPieceInquiry = () => {
             sortField: "Image",
             minWidth: "150px",
         },
-       
+
         {
             name: "Action",
             selector: (row) => {
@@ -151,7 +151,7 @@ const ArtPieceInquiry = () => {
                                     data-bs-target="#showModal"
                                     onClick={() => handleTog_edit(row._id)}
                                 >
-                                    Edit
+                                    View
                                 </button>
                             </div>
 
@@ -247,7 +247,7 @@ const ArtPieceInquiry = () => {
             setErrPI(false);
         }
 
-       
+
 
         return errors;
     };
@@ -278,7 +278,7 @@ const ArtPieceInquiry = () => {
         console.log(e.target.checked);
         setValues({ ...values, isActive: e.target.checked });
     };
- 
+
 
 
     const [modal_list, setModalList] = useState(false);
@@ -321,8 +321,8 @@ const ArtPieceInquiry = () => {
         if (Object.keys(errors).length === 0) {
             const formdata = new FormData();
 
-           
-      
+
+
 
 
             createInquiry(values)
@@ -355,7 +355,7 @@ const ArtPieceInquiry = () => {
         }
     };
 
- 
+
     const handleDelete = (e) => {
         e.preventDefault();
         removeInquiry(remove_id)
@@ -382,8 +382,8 @@ const ArtPieceInquiry = () => {
         // if (Object.keys(errors).length === 0) {
         const formdata = new FormData();
 
-     
-   
+
+
         updateInquiry(_id, values)
             .then((res) => {
                 // setmodal_edit(!modal_edit);
@@ -435,19 +435,19 @@ const ArtPieceInquiry = () => {
                 setValues({
                     ...values,
 
-                    artName: res.artName,                   
-                    name: res.name,                 
-                   
-                    email: res.email,                       
-                    isActive: res.isActive,                 
-                    desc: res.desc,                        
-                    phone: res.phone,                                 
-                    countryCode: res.countryCode,                              
-                     
+                    artName: res.artName,
+                    name: res.name,
+
+                    email: res.email,
+                    isActive: res.isActive,
+                    desc: res.desc,
+                    phone: res.phone,
+                    countryCode: res.countryCode,
+
 
                 });
 
-              
+
             })
             .catch((err) => {
                 console.log(err);
@@ -627,19 +627,19 @@ const ArtPieceInquiry = () => {
         });
     };
 
-    const [temp , settemp] = useState([])
-    useEffect(()=>{
-        axios.get(`${process.env.REACT_APP_API_URL}/api/auth/list/ArtPiece`).then((res)=>{
+    const [temp, settemp] = useState([])
+    useEffect(() => {
+        axios.get(`${process.env.REACT_APP_API_URL}/api/auth/list/ArtPiece`).then((res) => {
             console.log(res)
             let temp = res
-            .map((item) => ({
-              label: item.artName,
-              value: item._id,
-            }))
+                .map((item) => ({
+                    label: item.artName,
+                    value: item._id,
+                }))
             settemp(temp)
         })
-    },[])
-    
+    }, [])
+
     const isdCodes = [
         { country: "Afghanistan", code: "+93" },
         { country: "Albania", code: "+355" },
@@ -865,7 +865,7 @@ const ArtPieceInquiry = () => {
         { country: "Yemen", code: "+967" },
         { country: "Zambia", code: "+260" },
         { country: "Zimbabwe", code: "+263" },
-      ];
+    ];
 
     document.title = "Inquiry | ArtTint";
 
@@ -885,7 +885,7 @@ const ArtPieceInquiry = () => {
                                 <CardHeader>
                                     <Row className="g-4 mb-1">
                                         <Col className="col-sm" lg={4} md={6} sm={6}>
-                                            <h2 className="card-title mb-0 fs-4 mt-2">Art Piece Master</h2>
+                                            <h2 className="card-title mb-0 fs-4 mt-2">Inquiry Master</h2>
                                         </Col>
                                         <Col lg={4} md={6} sm={6}>
                                             <div
@@ -1006,7 +1006,7 @@ const ArtPieceInquiry = () => {
                                                     <CardBody>
                                                         <div className="live-preview">
                                                             <Form>
-                                                            <Row>
+                                                                <Row>
                                                                     <Row>
                                                                         {/* Artist Name */}
                                                                         <Col lg={6} className="mb-3">
@@ -1039,28 +1039,28 @@ const ArtPieceInquiry = () => {
                                                                             {isSubmit && <p className="text-danger">{formErrors.email}</p>}
 
                                                                         </Col>
-                                                                       
+
                                                                         {/* Category (Dropdown) */}
-                                                                            <Col lg={4} className="mb-3">
-                                                                                <Label>Country Code </Label>
-                                                                                <Input
-                                                                                    type="select"
-                                                                                    name="countryCode"
-                                                                                    required
-                                                                                    value={values.countryCode}
-                                                                                    onChange={handleChange}
-                                                                                >
-                                                                                    <option value="">Select County Code</option>
-                                                                                    {isdCodes.map((items) => (
-                                                                                        <option value={items.code} key={items.code} >({items.code}){items.country}</option>)
-                                                                                    )}
+                                                                        <Col lg={4} className="mb-3">
+                                                                            <Label>Country Code </Label>
+                                                                            <Input
+                                                                                type="select"
+                                                                                name="countryCode"
+                                                                                required
+                                                                                value={values.countryCode}
+                                                                                onChange={handleChange}
+                                                                            >
+                                                                                <option value="">Select County Code</option>
+                                                                                {isdCodes.map((items) => (
+                                                                                    <option value={items.code} key={items.code} >({items.code}){items.country}</option>)
+                                                                                )}
 
 
 
-                                                                                </Input>
-                                                                            
+                                                                            </Input>
 
-                                                                            </Col>
+
+                                                                        </Col>
 
 
 
@@ -1096,7 +1096,7 @@ const ArtPieceInquiry = () => {
 
 
                                                                             </Input>
-                                                                          
+
 
                                                                         </Col>
 
@@ -1110,7 +1110,7 @@ const ArtPieceInquiry = () => {
                                                                                 value={values.desc}
                                                                                 onChange={handleChange}
                                                                             /></Col>
-                                                                      
+
                                                                         {/* Is Active */}
                                                                         <Col lg={6}>
 
@@ -1155,7 +1155,7 @@ const ArtPieceInquiry = () => {
                                                 <Card className="">
                                                     <CardBody>
                                                         <div className="live-preview">
-                                                        <Form>
+                                                            <Form>
                                                                 <Row>
                                                                     <Row>
                                                                         {/* Artist Name */}
@@ -1189,28 +1189,28 @@ const ArtPieceInquiry = () => {
                                                                             {isSubmit && <p className="text-danger">{formErrors.email}</p>}
 
                                                                         </Col>
-                                                                       
+
                                                                         {/* Category (Dropdown) */}
-                                                                            <Col lg={4} className="mb-3">
-                                                                                <Label>Country Code </Label>
-                                                                                <Input
-                                                                                    type="select"
-                                                                                    name="countryCode"
-                                                                                    disabled
-                                                                                    value={values.countryCode}
-                                                                                    onChange={handleChange}
-                                                                                >
-                                                                                    <option value="">Select Country Code</option>
-                                                                                    {isdCodes.map((items) => (
-                                                                                        <option value={items.code} key={items.code} >({items.code}){items.country}</option>)
-                                                                                    )}
+                                                                        <Col lg={4} className="mb-3">
+                                                                            <Label>Country Code </Label>
+                                                                            <Input
+                                                                                type="select"
+                                                                                name="countryCode"
+                                                                                disabled
+                                                                                value={values.countryCode}
+                                                                                onChange={handleChange}
+                                                                            >
+                                                                                <option value="">Select Country Code</option>
+                                                                                {isdCodes.map((items) => (
+                                                                                    <option value={items.code} key={items.code} >({items.code}){items.country}</option>)
+                                                                                )}
 
 
 
-                                                                                </Input>
-                                                                            
+                                                                            </Input>
 
-                                                                            </Col>
+
+                                                                        </Col>
 
 
 
@@ -1246,7 +1246,7 @@ const ArtPieceInquiry = () => {
 
 
                                                                             </Input>
-                                                                          
+
 
                                                                         </Col>
 
@@ -1260,7 +1260,7 @@ const ArtPieceInquiry = () => {
                                                                                 value={values.desc}
                                                                                 onChange={handleChange}
                                                                             /></Col>
-                                                                      
+
                                                                         {/* Is Active */}
                                                                         <Col lg={6}>
 
@@ -1278,10 +1278,16 @@ const ArtPieceInquiry = () => {
 
                                                                     </Row>
                                                                     <Row>
-                                                                        <FormsFooter
-                                                                            handleSubmit={handleUpdate}
-                                                                            handleSubmitCancel={handleUpdateCancel}
-                                                                        />
+                                                                        <div className="hstack gap-2 justify-content-end">
+                                                                            
+                                                                            <button
+                                                                                type="button"
+                                                                                className="btn btn-outline-danger"
+                                                                                onClick={handleUpdateCancel}
+                                                                            >
+                                                                                Cancel
+                                                                            </button>
+                                                                        </div>
                                                                     </Row>
                                                                 </Row>
                                                             </Form>

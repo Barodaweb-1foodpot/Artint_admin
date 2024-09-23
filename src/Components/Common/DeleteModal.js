@@ -11,7 +11,7 @@ const DeleteModal = ({ show, handleDelete, handleDeleteClose, setmodal_delete })
             setmodal_delete(false);
           }}
         >
-          Remove Category
+          Remove 
         </ModalHeader>
       <ModalBody className="py-3 px-5">
         <div className="mt-2 text-center">

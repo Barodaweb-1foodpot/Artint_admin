@@ -34,6 +34,8 @@ const UserProfile = () => {
   const [email, setemail] = useState("admin@rccoffee.in");
   const [idx, setidx] = useState("1");
 
+  const admin_email = localStorage.getItem('AdminUserEmail')
+
   const [userName, setUserName] = useState("ArtTint");
 
   const { user, success, error } = useSelector(state => ({
@@ -93,17 +95,12 @@ const UserProfile = () => {
               <Card>
                 <CardBody>
                   <div className="d-flex">
-                    <div className="mx-3">
-                      <img
-                        src={logo}
-                        alt=""
-                        className="avatar-md rounded-circle img-thumbnail"
-                      />
-                    </div>
+                   
+                      
                     <div className="flex-grow-1 align-self-center">
                       <div className="text-muted">
                         <h5>{userName || "Admin"}</h5>
-                        <p className="mb-1">Email Id : {email}</p>
+                        <p className="mb-1">Email Id : {admin_email }</p>
                         {/* <p className="mb-0">Id No : #{idx}</p> */}
                       </div>
                     </div>

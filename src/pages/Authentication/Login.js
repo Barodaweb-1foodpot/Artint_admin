@@ -64,6 +64,7 @@ const Login = (props) => {
           console.log(" login", res);
 
           localStorage.setItem("AdminUser", res.data._id);
+          localStorage.setItem("AdminUserEmail", res.data.email);
 
           window.location.replace("/admin-user");
         } else {

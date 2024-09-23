@@ -18,6 +18,8 @@ import {
 import BreadCrumb from "../../Components/Common/BreadCrumb";
 import DataTable from "react-data-table-component";
 import axios from "axios";
+import { Spinner } from 'reactstrap';
+
 
 import {
     createArtPiece,
@@ -246,7 +248,7 @@ const ArtPiece = () => {
 
     const [errPr, setErrPr] = useState(false);
 
-    const validate = (values) => {
+    const validate = () => {
         const errors = {};
         if (values.artName === "") {
             errors.artName = "Art Name is required";
@@ -269,6 +271,50 @@ const ArtPiece = () => {
             errors.artImage = "Image is required!";
             // setErrGI(true);
         }
+
+
+
+        if (values.category === "") {
+            errors.category = "Category is required";
+            setErrPI(true);
+        }
+
+        if (values.category !== "") {
+            setErrPI(false);
+        }
+
+        if (values.URL_link === "") {
+            errors.URL_link = "URL is required";
+            setErrPI(true);
+        }
+
+        if (values.URL_link !== "") {
+            setErrPI(false);
+        }
+
+        return errors;
+    };
+
+    const validateEdit = () => {
+        const errors = {};
+        if (values.artName === "") {
+            errors.artName = "Art Name is required";
+            setErrCN(true);
+        }
+        if (values.artName !== "") {
+            setErrCN(false);
+        }
+
+        if (values.artistName === "") {
+            errors.artistName = "Artist Name is required";
+            setErrPN(true);
+        }
+
+        if (values.artist !== "") {
+            setErrPN(false);
+        }
+
+  
 
 
 
@@ -362,12 +408,13 @@ const ArtPiece = () => {
 
     const handleClick = (e) => {
         e.preventDefault();
-        let errors = validate(values);
+        let errors = validate();
         setFormErrors(errors);
         setIsSubmit(true);
         console.log(croppedImages)
         console.log(values)
         if (Object.keys(errors).length === 0) {
+            setLoading(true)
             const formdata = new FormData();
 
             formdata.append("artImage", croppedBlobs, "artImage.png");
@@ -392,6 +439,7 @@ const ArtPiece = () => {
             createArtPiece(formdata)
                 .then((res) => {
                     if (res.isOk) {
+                        setLoading(false)
                         toast.success(res.message)
                         // setModalList(!modal_list);
                         setShowForm(false);
@@ -444,10 +492,12 @@ const ArtPiece = () => {
     const handleUpdate = (e) => {
         e.preventDefault();
 
-        // let errors = validate(values);
-        // setFormErrors(errors);
+        let errors = validateEdit();
+        setFormErrors(errors);
+        console.log(errors)
         setIsSubmit(true);
-        // if (Object.keys(errors).length === 0) {
+        if (Object.keys(errors).length === 0) {
+            setLoading(true)
         const formdata = new FormData();
 
         if (croppedBlobs.length === 0) {
@@ -477,6 +527,7 @@ const ArtPiece = () => {
                 if(res.isOk)
                 // setmodal_edit(!modal_edit);
                { setPhotoAdd("");
+                setLoading(false)
                 setUpdateForm(false);
                 toast.success(res.message)
                 fetchProducts();
@@ -489,7 +540,7 @@ const ArtPiece = () => {
             .catch((err) => {
                 console.log(err);
             });
-        // }
+        }
     };
 
     const handleAddCancel = (e) => {
@@ -1139,6 +1190,11 @@ const ArtPiece = () => {
                                                                         {/* Submit and Cancel */}
 
                                                                     </Row>
+                                                                    {loading && 
+                                                                            <div className="d-flex justify-content-center mx-2 mt-2">
+                                                                            <Spinner color="primary"> Loading... </Spinner>
+                                                                        </div>
+                                                                        }
                                                                     <Row>
                                                                         <FormsFooter
                                                                             handleSubmit={handleClick}
@@ -1431,6 +1487,11 @@ const ArtPiece = () => {
                                                                         </Col>
 
                                                                         {/* Submit and Cancel */}
+                                                                        {loading && 
+                                                                            <div className="d-flex justify-content-center mx-2 mt-2">
+                                                                            <Spinner color="primary"> Loading... </Spinner>
+                                                                        </div>
+                                                                        }
 
                                                                     </Row>
                                                                     <Row>
